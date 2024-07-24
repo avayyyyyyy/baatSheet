@@ -13,54 +13,54 @@ const features = [
     name: "Store your PDF Documents",
     description:
       "Keep all your important PDF files securely stored and easily accessible anytime, anywhere.",
-    icon: <GlobeIcon size={18} className="text-indigo-500" />,
+    icon: <GlobeIcon size={18} className="text-[#fe640b]" />,
   },
   {
     name: "Blazing Fast Responses",
     description:
       "Experience lightning-fast answers to your queries, ensuring you get the information you need instantly.",
-    icon: <ZapIcon size={18} className="text-indigo-500" />,
+    icon: <ZapIcon size={18} className="text-[#fe640b]" />,
   },
   {
     name: "Chat Memorisation",
     description:
       "Our intelligent chatbot remembers previous interactions, providing a seamless and personalized experience.",
-    icon: <BrainCogIcon size={18} className="text-indigo-500" />,
+    icon: <BrainCogIcon size={18} className="text-[#fe640b]" />,
   },
   {
     name: "Interactive PDF Viewer",
     description:
       "Engage with your PDFs like never before using our intuitive and interactive viewer.",
-    icon: <EyeIcon size={18} className="text-indigo-500" />,
+    icon: <EyeIcon size={18} className="text-[#fe640b]" />,
   },
   {
     name: "Cloud Backup",
     description:
       "Rest assured knowing your documents are safely backed up on the cloud, protected from loss or damage.",
-    icon: <CloudIcon size={18} className="text-indigo-500" />,
+    icon: <CloudIcon size={18} className="text-[#fe640b]" />,
   },
   {
     name: "Cloud Backup",
     description:
       "Rest assured knowing your documents are safely backed up on the cloud, protected from loss or damage.",
-    icon: <CloudIcon size={18} className="text-indigo-500" />,
+    icon: <CloudIcon size={18} className="text-[#fe640b]" />,
   },
 ];
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center text-left md:text-center justify-between p-3 bg-gradient-to-r from-indigo-500 to-white ">
-      <div className="bg-white rounded-md pt-10 p-5 w-full shadow-sm h-full text-sm">
-        <div className="text-indigo-600 mb-1">
+    <main className="flex min-h-screen flex-col items-center text-left md:text-center justify-between p-3 bg-gradient-to-r from-[#fe640b] to-white ">
+      <div className="bg-white rounded-md pt-10 p-5 w-full shadow-2xl h-full text-sm">
+        <div className="text-[#fe640b] mb-1">
           Your Interactive Document Comparison
         </div>
-        <div className="font-bold md:text-5xl mt-2 text-3xl">
+        <div className="font-bold md:text-5xl text-transparent bg-clip-text bg-gradient-to-br from-zinc-950 to-zinc-600 mt-2 text-3xl">
           Transform your PDF&apos;s into <br />
           Interactive Conversations
         </div>
         <div className="my-2 font-medium text-lg">
           Introducing{" "}
-          <span className="text-indigo-500 font-semibold underline">
+          <span className="text-[#fe640b] font-semibold underline">
             BaatSheet
           </span>
         </div>
@@ -77,7 +77,7 @@ export default function Home() {
           <Image
             src="https://dashboardsdesign.com/img/dashboards/dashboard-05-custom.png"
             alt="hero-section"
-            className="h-full w-[90%] border-2 border-indigo-500 mt-5 rounded-lg object-cover md:w-[1300px]"
+            className="h-full w-[90%] border-2 border-[#fe640b] mt-5 rounded-lg object-cover md:w-[1300px]"
             style={{
               maskImage: `linear-gradient(to top, transparent, black 70%)`,
             }}
