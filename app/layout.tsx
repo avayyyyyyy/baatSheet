@@ -17,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html
+        lang="en"
+        className="min-h-screen h-screen overfow-hidden flex flex-col"
+      >
         <body className={inter.className}>{children}</body>
       </html>
     </ClerkProvider>
