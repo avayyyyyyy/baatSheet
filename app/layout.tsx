@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkLoaded, ClerkProvider } from "@clerk/nextjs";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,9 @@ export default function RootLayout({
         lang="en"
         className="min-h-screen h-screen overfow-hidden flex flex-col"
       >
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <ClerkLoaded>{children}</ClerkLoaded>
+        </body>
       </html>
     </ClerkProvider>
   );

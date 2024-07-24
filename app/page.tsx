@@ -1,12 +1,16 @@
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { SignIn, SignInButton } from "@clerk/nextjs";
 import {
   ZapIcon,
   GlobeIcon,
   BrainCogIcon,
   EyeIcon,
   CloudIcon,
+  SearchIcon,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const features = [
   {
@@ -40,25 +44,25 @@ const features = [
     icon: <CloudIcon size={18} className="text-[#fe640b]" />,
   },
   {
-    name: "Cloud Backup",
+    name: "Advanced Search",
     description:
-      "Rest assured knowing your documents are safely backed up on the cloud, protected from loss or damage.",
-    icon: <CloudIcon size={18} className="text-[#fe640b]" />,
+      "Quickly find specific documents or information within your PDFs using our powerful search feature.",
+    icon: <SearchIcon size={18} className="text-[#fe640b]" />,
   },
 ];
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center text-left md:text-center justify-between p-3 bg-gradient-to-r from-[#fe640b] to-white ">
-      <div className="bg-white rounded-md pt-10 p-5 w-full shadow-2xl h-full text-sm">
+      <div className="bg-white rounded-md md:pt-28 pt-10 p-5 w-full shadow-2xl h-full text-sm">
         <div className="text-[#fe640b] mb-1">
           Your Interactive Document Comparison
         </div>
-        <div className="font-bold md:text-5xl text-transparent bg-clip-text bg-gradient-to-br from-zinc-950 to-zinc-600 mt-2 text-3xl">
+        <div className="font-bold md:text-5xl lg:text-7xl text-transparent bg-clip-text bg-gradient-to-br from-zinc-950 to-zinc-600 my-5 text-3xl">
           Transform your PDF&apos;s into <br />
           Interactive Conversations
         </div>
-        <div className="my-2 font-medium text-lg">
+        <div className="my-5 font-medium text-lg">
           Introducing{" "}
           <span className="text-[#fe640b] font-semibold underline">
             BaatSheet
@@ -71,7 +75,9 @@ export default function Home() {
           productivity 10x fold effortlessly.
         </div>
         <div className="w-full flex">
-          <Button className="mt-4 mx-auto">Read More</Button>
+          <Button asChild className="my-5 mx-auto">
+            <Link href="/dashboard">Get Started</Link>
+          </Button>
         </div>
         <div className="relative flex max-w-6xl items-center mx-auto justify-center overflow-hidden">
           <Image
@@ -99,6 +105,7 @@ export default function Home() {
             })}
           </div>
         </div>
+        <Footer />
       </div>
     </main>
   );
