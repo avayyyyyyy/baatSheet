@@ -9,46 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/elements": "^0.10.5",
     "@clerk/nextjs": "^5.2.6",
-    "@langchain/community": "^0.2.20",
-    "@langchain/core": "^0.2.18",
-    "@langchain/openai": "^0.2.5",
-    "@langchain/pinecone": "^0.0.8",
-    "@pinecone-database/pinecone": "^3.0.0",
-    "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-dialog": "^1.1.1",
-    "@radix-ui/react-label": "^2.1.0",
-    "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
-    "@types/uuid": "^10.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "firebase": "^10.12.4",
-    "firebase-admin": "^12.3.0",
-    "firebase-functions": "^5.0.1",
-    "firebase-tools": "^13.14.1",
-    "langchain": "^0.2.11",
     "lucide-react": "^0.414.0",
     "next": "14.2.5",
-    "next-themes": "^0.3.0",
-    "pdf-parse": "^1.1.1",
     "react": "^18",
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",
-    "sonner": "^1.5.0",
     "tailwind-merge": "^2.4.0",
-    "tailwindcss-animate": "^1.0.7",
-    "uuid": "^10.0.0"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.5",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5"
   }
 }

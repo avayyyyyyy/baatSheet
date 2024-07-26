@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { SignIn, SignInButton } from "@clerk/nextjs";
 import {
   ZapIcon,
   GlobeIcon,
@@ -63,11 +64,11 @@ export default function Home() {
         </div>
         <div className="my-5 font-medium text-lg">
           Introducing{" "}
-          <Link href={"/"} className="text-[#fe640b] font-semibold underline ">
+          <span className="text-[#fe640b] font-semibold underline">
             BaatSheet
-          </Link>
+          </span>
         </div>
-        <div className="text-zinc-600 md:w-[70%] mx-auto">
+        <div className="text-zinc-600 md:w-[50%] mx-auto">
           Upload your document, and our chatbot will answer questions, summarize
           content, and answer all your Qs. Ideal for everyone, Chat with PDF
           turns static documents into dynamic conversations, enhancing
