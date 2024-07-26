@@ -18,7 +18,7 @@ const Page = () => {
     <div className="w-[90%] md:w-[80%] mx-auto mt-10">
       <div className=" my-5 rounded-md shadow-lg  bg-zinc-100 p-4 border-[#fe640b]">
         <p className="text-3xl font-semibold text-[#fe640b]">My Documents...</p>
-        <div className="flex space-x-3 mt-5">
+        <div className="flex flex-wrap justify-evenly md:justify-start m-auto items-center mt-5 w-full">
           <Uploadpdf />
         </div>
       </div>

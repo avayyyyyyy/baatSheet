@@ -66,7 +66,7 @@ export function Uploadpdf() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="h-80 w-60 drop-shadow bg-[#fe640b]/10 border-2 border-[#fe640b] hover:bg-[#fe640b]/20 flex flex-col gap-y-1 text-[#fe640b]">
+        <Button className="h-80 w-52 mr-3 mt-4 drop-shadow bg-[#fe640b]/10 border-2 border-[#fe640b] hover:bg-[#fe640b]/20 flex flex-col gap-y-1 text-[#fe640b]">
           <div>
             <PlusCircleIcon />
           </div>

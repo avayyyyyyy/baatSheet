@@ -39,7 +39,7 @@ const SocialLink = ({
 
 const Footer = () => {
   return (
-    <div className="flex w-full flex-col items-center justify-between gap-5 border-t border-[#fe640b]/5 pt-8 sm:flex-row dark:border-white/5">
+    <div className="flex w-full flex-col items-center justify-between gap-5 border-t border-[#fe640b]/5 sm:flex-row dark:border-white/5">
       <p className="text-xs text-black dark:text-[#000]">
         Copyright © {new Date().getFullYear()}{" "}
         <a

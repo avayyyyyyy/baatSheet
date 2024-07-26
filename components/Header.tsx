@@ -19,11 +19,11 @@ function Header() {
         <Button asChild variant={"outline"}>
           <Link href="/dashboard">My Documents</Link>
         </Button>
-        <Button asChild variant={"outline"} className="border-[#fe640b]">
+        {/* <Button asChild variant={"outline"} className="border-[#fe640b]">
           <Link href="/dashboard/uploads">
             <FilePlus2 className="text-[#fe640b]" />
           </Link>
-        </Button>
+        </Button> */}
         <div className="flex">
           <SignedIn>
             <UserButton />
