@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from "uuid";
 export enum StatusText {
   UPLOADING = "Uploading file...",
   UPLOADED = "File Uploaded Successfully!",
-  SAVING = "Saving file to the DB...",
+  SAVING = "Saving your file in the DB...",
   GENERATING = "Generating AI Embedding, this will take some few seconds...",
   GENERATED = "AI Embedding Generated Successfully!",
 }
