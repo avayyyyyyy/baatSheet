@@ -80,7 +80,7 @@ export default function Home() {
         </div>
         <div className="relative flex max-w-6xl items-center mx-auto justify-center overflow-hidden">
           <Image
-            src="https://utfs.io/f/f423ce40-fcd2-4e94-bc54-f1c85dac203c-7bhyek.webp"
+            src="https://utfs.io/f/8650e424-4623-4b52-9f6f-be634bf05cbe-sgqkmj.webp"
             alt="hero-section"
             className="h-full w-[90%] border-[#fe640b] rounded-lg object-cover md:w-[1300px]"
             style={{
