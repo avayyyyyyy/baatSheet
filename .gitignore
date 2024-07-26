@@ -34,3 +34,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+baatsheet-firebase-adminsdk-bsrdc-659225ba1a.json
