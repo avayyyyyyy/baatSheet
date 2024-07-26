@@ -36,7 +36,7 @@ const Page = async () => {
               <>
                 <Link href={`/dashboard/files/${doc.id}`}>
                   <Card
-                    className="w-60 max-w-sm min-h-80 mx-2 mt-4 hover:bg-zinc-200"
+                    className="min-w-60 max-w-sm min-h-80 mx-2 mt-4 hover:bg-zinc-200"
                     key={doc.id}
                   >
                     {/* <Image
