@@ -12,6 +12,7 @@ import { BotIcon, LoaderIcon, Send } from "lucide-react";
 import Footer from "./Footer";
 import { askQuestion } from "@/actions/askQuestion";
 import "../app/globals.css";
+import Markdown from "react-markdown";
 
 export type Message = {
   role: "human" | "bot" | "placeholder";
@@ -142,7 +143,7 @@ const ChatComp = ({ id }: { id: string }) => {
               isHuman ? "bg-primary text-primary-foreground" : "bg-muted"
             }`}
           >
-            {msg.message}
+            <Markdown>{msg.message}</Markdown>
           </div>
         </div>
         {isHuman && (
