@@ -7,9 +7,6 @@ function layout({ children }: { children: React.ReactNode }) {
     <div className="flex flex-col justify-between">
       <Header />
       {children}
-      {/* <div className="bg-white rounded-md p-5 border-t w-full shadow-2xl text-sm">
-        <Footer />
-      </div> */}
     </div>
   );
 }

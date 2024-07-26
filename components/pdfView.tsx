@@ -11,6 +11,9 @@ import {
   ZoomOutIcon,
   LoaderIcon,
   RefreshCcwIcon,
+  ArrowLeftSquare,
+  ArrowRight,
+  ArrowLeft,
 } from "lucide-react";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
@@ -71,7 +74,9 @@ const PdfView = ({ url }: { url: string }) => {
                 variant="outline"
                 size="icon"
               >
-                <div className="h-5 w-5">-</div>
+                <div className="h-5 w-5">
+                  <ArrowLeft />
+                </div>
                 <span className="sr-only">Next Page</span>
               </Button>
               <Button
@@ -85,7 +90,10 @@ const PdfView = ({ url }: { url: string }) => {
                 variant="outline"
                 size="icon"
               >
-                <div className="h-5 w-5">+</div>
+                <div className="h-5 w-5">
+                  {" "}
+                  <ArrowRight />
+                </div>
                 <span className="sr-only">Next Page</span>
               </Button>
               <Button

@@ -1,22 +1,49 @@
 import { ChatOpenAI } from "@langchain/openai";
 import { OpenAIEmbeddings } from "@langchain/openai";
 import { HumanMessage, AIMessage } from "@langchain/core/messages";
-import { createRetrievalChain } from "langchain/chains/retrieval";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
-import pineconeClient from "./pincone";
 import { PineconeStore } from "@langchain/pinecone";
-import { PineconeConflictError } from "@pinecone-database/pinecone/dist/errors";
 import { Index, RecordMetadata } from "@pinecone-database/pinecone";
 import { auth } from "@clerk/nextjs/server";
-import { doc } from "firebase/firestore";
 import { adminDB } from "@/firebaseAdmin";
+import { createRetrievalChain } from "langchain/chains/retrieval";
+import { createStuffDocumentsChain } from "langchain/chains/combine_documents";
+import { createHistoryAwareRetriever } from "langchain/chains/history_aware_retriever";
+import pineconeClient from "./pincone";
 
 const model = new ChatOpenAI({
   apiKey: process.env.OPENAI_API_KEY,
   modelName: "gpt-3.5-turbo",
 });
+
+export async function fetchMessageFromDB(docID: string) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error("User not found");
+  }
+
+  const chatRef = await adminDB
+    .collection("users")
+    .doc(userId)
+    .collection("files")
+    .doc(docID)
+    .collection("chat")
+    .orderBy("createdAt", "desc")
+    .get();
+
+  const chatHistory = chatRef.docs.map((doc) =>
+    doc.data().role === "human"
+      ? new HumanMessage(doc.data().message)
+      : new AIMessage(doc.data().message)
+  );
+
+  console.log(`Fetched ${chatHistory.length} messages from the database`);
+  console.log(chatHistory.map((msg) => msg.content.toString()));
+  return chatHistory;
+}
 
 export async function generateDocs(docID: string) {
   const { userId } = await auth();
@@ -32,7 +59,7 @@ export async function generateDocs(docID: string) {
     .doc(docID)
     .get();
 
-  const downloadURL = await docRef.data()?.url;
+  const downloadURL = docRef.data()?.url;
 
   console.log(docRef.data()?.url);
 
@@ -52,8 +79,6 @@ export async function generateDocs(docID: string) {
 
   const docs = await pdfLoader.load();
 
-  // split the document into smaller chunks
-
   console.log("----Splitting Document into smaller chunks----");
 
   const splitter = new RecursiveCharacterTextSplitter();
@@ -65,7 +90,10 @@ export async function generateDocs(docID: string) {
   return chunks;
 }
 
-async function namespaceexist(index: Index<RecordMetadata>, namespace: string) {
+async function namespaceExists(
+  index: Index<RecordMetadata>,
+  namespace: string
+) {
   if (!namespace) {
     throw new Error("Namespace not found");
   }
@@ -78,7 +106,8 @@ async function namespaceexist(index: Index<RecordMetadata>, namespace: string) {
 export const indexName = "baatsheet";
 
 export async function generateEmbeddingsInPineconeVectorDB(docID: string) {
-  const userId = await auth();
+  const { userId } = await auth();
+
   if (!userId) {
     throw new Error("User not found");
   }
@@ -88,12 +117,12 @@ export async function generateEmbeddingsInPineconeVectorDB(docID: string) {
   console.log("----Generating Embeddings in Pinecone Vector DB----");
 
   const embeddings = new OpenAIEmbeddings({
-    model: "text-embedding-3-small",
+    model: "text-embedding-ada-002",
   });
 
   const index = await pineconeClient.index(indexName);
 
-  const nameSpaceAlreadyExists = await namespaceexist(index, docID);
+  const nameSpaceAlreadyExists = await namespaceExists(index, docID);
 
   if (nameSpaceAlreadyExists) {
     console.log(
@@ -105,16 +134,14 @@ export async function generateEmbeddingsInPineconeVectorDB(docID: string) {
     });
     return pineconeVectorStore;
   } else {
-    // if the namespace does not exist, download the pdf from firebase storage via the download URL and generate embeddings and then store them in pinecone
-
-    const slpitDocs = await generateDocs(docID);
+    const splitDocs = await generateDocs(docID);
 
     console.log(
       `Storing the embeddings in ${docID} in the ${indexName} Pinecone Vector DB`
     );
 
     pineconeVectorStore = await PineconeStore.fromDocuments(
-      slpitDocs,
+      splitDocs,
       embeddings,
       {
         pineconeIndex: index,
@@ -124,3 +151,63 @@ export async function generateEmbeddingsInPineconeVectorDB(docID: string) {
     return pineconeVectorStore;
   }
 }
+
+const generateLangchainCompletion = async (docID: string, question: string) => {
+  let pineconeStore;
+
+  pineconeStore = await generateEmbeddingsInPineconeVectorDB(docID);
+  console.log("----Creating Langchain Retriever----");
+  const retrievalChain = pineconeStore.asRetriever();
+
+  const chatHistory = await fetchMessageFromDB(docID);
+
+  console.log("Defining a prompt template");
+
+  const historyAwarePromptTemplate = ChatPromptTemplate.fromMessages([
+    ...chatHistory,
+    ["user", "{input}"],
+    [
+      "user",
+      "Given the conversation above, provide a search query to look up relevant information from the conversation.",
+    ],
+  ]);
+
+  const historyAwareRetrieverChain = await createHistoryAwareRetriever({
+    llm: model,
+    retriever: retrievalChain,
+    rephrasePrompt: historyAwarePromptTemplate,
+  });
+
+  console.log("---Defining a prompt template to answer the question---");
+
+  const questionPromptTemplate = ChatPromptTemplate.fromMessages([
+    [
+      "system",
+      "Answer the user question based on the below content: \n\n {context}",
+    ],
+    ...chatHistory,
+    ["user", question],
+  ]);
+
+  const historyCombinedDocsChain = await createStuffDocumentsChain({
+    llm: model,
+    prompt: questionPromptTemplate,
+  });
+
+  console.log("Creating the main retrieval chain");
+
+  const conversationalRetrievalChain = await createRetrievalChain({
+    retriever: historyAwareRetrieverChain,
+    combineDocsChain: historyCombinedDocsChain,
+  });
+
+  const result = await conversationalRetrievalChain.invoke({
+    chat_history: chatHistory,
+    input: question,
+  });
+
+  console.log(result);
+  return result.answer;
+};
+
+export { model, generateLangchainCompletion };
