@@ -53,7 +53,10 @@ const Footer = () => {
         <SocialLink href="https://twitter.com/shubhcodes" icon={XIcon}>
           Follow me on X
         </SocialLink>
-        <SocialLink href="http://github.com/avayyyyyyy" icon={GitHubIcon}>
+        <SocialLink
+          href="https://github.com/avayyyyyyy/baatSheet"
+          icon={GitHubIcon}
+        >
           Follow me on GitHub
         </SocialLink>
       </div>
