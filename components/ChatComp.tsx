@@ -8,7 +8,7 @@ import { useUser } from "@clerk/nextjs";
 import { db } from "@/firebase";
 import { Button } from "./ui/button";
 import { AvatarFallback, AvatarImage } from "./ui/avatar";
-import { LoaderIcon, Send } from "lucide-react";
+import { BotIcon, LoaderIcon, Send } from "lucide-react";
 import Footer from "./Footer";
 import { askQuestion } from "@/actions/askQuestion";
 import "../app/globals.css";
@@ -128,7 +128,9 @@ const ChatComp = ({ id }: { id: string }) => {
         {!isHuman && (
           <Avatar className="h-8 w-8 shrink-0 rounded-full">
             <AvatarImage src="/placeholder-user.jpg" />
-            <AvatarFallback>BS</AvatarFallback>
+            <AvatarFallback>
+              <BotIcon />
+            </AvatarFallback>
           </Avatar>
         )}
         <div className={`grid gap-1 ${isHuman ? "text-right" : ""}`}>

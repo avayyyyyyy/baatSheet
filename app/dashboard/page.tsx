@@ -36,7 +36,7 @@ const Page = async () => {
               <>
                 <Link href={`/dashboard/files/${doc.id}`}>
                   <Card
-                    className="w-full max-w-sm min-h-80 mt-4 hover:bg-zinc-200"
+                    className="w-60 max-w-sm min-h-80 mx-2 mt-4 hover:bg-zinc-200"
                     key={doc.id}
                   >
                     {/* <Image
@@ -47,7 +47,9 @@ const Page = async () => {
                     className="object-cover w-full rounded-t-lg aspect-square"
                   /> */}
                     <CardContent className="p-4">
-                      <h3 className="text-sm font-semibold">{name}</h3>
+                      <h3 className="text-sm font-semibold">
+                        {name.slice(0, 20)}...
+                      </h3>
                       <p>{byteSize(size).value} KB</p>
                     </CardContent>
                   </Card>
