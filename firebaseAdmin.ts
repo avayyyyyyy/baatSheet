@@ -8,7 +8,7 @@ let app: App;
 
 if (getApps().length === 0) {
   app = initializeApp({
-    credential: admin.credential.cert(serviceKey), // Use admin.credential.cert to create the credential object
+    credential: admin.credential.cert(serviceKey),
   });
 } else {
   app = getApp();
