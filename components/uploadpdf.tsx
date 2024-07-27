@@ -14,6 +14,7 @@ import {
   ArrowDownNarrowWide,
   CircleCheckIcon,
   Frown,
+  Loader,
   PlusCircleIcon,
   RocketIcon,
 } from "lucide-react";
@@ -25,21 +26,26 @@ import useSubscription from "./hooks/useSubscription";
 
 export function Uploadpdf() {
   const { progress, status, fileId, handleUpload, isUploading } = useUpload();
-  const { hasActiveSubscription, isFileLimitOver } = useSubscription();
+  const { hasActiveSubscription, isFileLimitOver, fetching } =
+    useSubscription();
   const router = useRouter();
+
   useEffect(() => {
     if (fileId) {
       router.push(`/dashboard/files/${fileId}`);
     }
   }, [fileId, router]);
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    const file = acceptedFiles[0];
-    if (file) {
-      // await handlefileuploadfunction
-      await handleUpload(file);
-    }
-    console.log(acceptedFiles[0]);
-  }, []);
+
+  const onDrop = useCallback(
+    async (acceptedFiles: File[]) => {
+      const file = acceptedFiles[0];
+      if (file) {
+        await handleUpload(file);
+      }
+      console.log(acceptedFiles[0]);
+    },
+    [handleUpload]
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -69,7 +75,20 @@ export function Uploadpdf() {
 
   return (
     <div>
-      {!hasActiveSubscription || isFileLimitOver ? (
+      {fetching ? (
+        <Button
+          disabled
+          className="h-80 min-w-56 mr-3 mt-4 drop-shadow bg-[#fe640b]/10 border-2 border-[#fe640b] hover:bg-[#fe640b]/20 flex flex-col gap-y-1 text-[#fe640b]"
+        >
+          <div>
+            <Loader className="animate-spin" />
+          </div>
+          <div className="text-[#fe640b]">
+            Loading <br />
+            Please wait for a moment.
+          </div>
+        </Button>
+      ) : !hasActiveSubscription || isFileLimitOver ? (
         <Button
           disabled
           className="h-80 min-w-56 mr-3 mt-4 drop-shadow bg-[#fe640b]/10 border-2 border-[#fe640b] hover:bg-[#fe640b]/20 flex flex-col gap-y-1 text-[#fe640b]"
@@ -85,21 +104,12 @@ export function Uploadpdf() {
       ) : (
         <Dialog>
           <DialogTrigger asChild>
-            {hasActiveSubscription ? (
-              <Button className="h-80 w-52 mr-3 mt-4 drop-shadow bg-[#fe640b]/10 border-2 border-[#fe640b] hover:bg-[#fe640b]/20 flex flex-col gap-y-1 text-[#fe640b]">
-                <div>
-                  <PlusCircleIcon />
-                </div>
-                <div className="text-[#fe640b]">Add a new document</div>
-              </Button>
-            ) : (
-              <Button className="h-80 w-52 mr-3 mt-4 drop-shadow bg-[#fe640b]/10 border-2 border-[#fe640b] hover:bg-[#fe640b]/20 flex flex-col gap-y-1 text-[#fe640b]">
-                <div>
-                  <PlusCircleIcon />
-                </div>
-                <div className="text-[#fe640b]">Add a new document</div>
-              </Button>
-            )}
+            <Button className="h-80 w-52 mr-3 mt-4 drop-shadow bg-[#fe640b]/10 border-2 border-[#fe640b] hover:bg-[#fe640b]/20 flex flex-col gap-y-1 text-[#fe640b]">
+              <div>
+                <PlusCircleIcon />
+              </div>
+              <div className="text-[#fe640b]">Add a new document</div>
+            </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[500px]">
             {isUploading || progress > 0 ? (
@@ -144,17 +154,17 @@ export function Uploadpdf() {
                     <div className="flex bg-[#fe640b]/10 h-48 w-full flex-col items-center justify-center rounded-md border-2 border-dashed border-[#fe640b] p-4 text-center">
                       <input {...getInputProps()} />
                       {isDragActive ? (
-                        <div className="w-96  flex items-center flex-col justify-center">
+                        <div className="w-96 flex items-center flex-col justify-center">
                           <RocketIcon className="h-10 w-10 text-[#fe640b] animate-bounce" />
                           <p className="mt-4 text-sm font-medium text-[#fe640b]">
                             Drop the files here...
                           </p>
                           <p className="mt-2 text-xs text-[#fe640b]">
-                            excited to read your docs 😙
+                            Excited to read your docs 😙
                           </p>
                         </div>
                       ) : (
-                        <div className="w-96  flex items-center flex-col justify-center">
+                        <div className="w-96 flex items-center flex-col justify-center">
                           <CloudUploadIcon className="h-10 w-10 text-[#fe640b]" />
                           <p className="mt-4 text-sm font-medium text-[#fe640b]">
                             Drag and drop files or click to upload
