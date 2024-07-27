@@ -14,6 +14,7 @@ import {
   ArrowLeftSquare,
   ArrowRight,
   ArrowLeft,
+  RotateCwIcon,
 } from "lucide-react";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
@@ -60,11 +61,11 @@ const PdfView = ({ url }: { url: string }) => {
         <div className="flex w-[90vw] md:w-[50vw] h-full mx-auto overflow-hidden flex-col">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="md:text-xl text-sm font-semibold">
-              Chat with your PDF your Way...
+              Chat with your PDF...
             </h2>
 
             <div className="flex items-center gap-2">
-              <p>
+              <p className="text-sm">
                 {pageNumber} of {numPages}
               </p>
               <Button
@@ -108,7 +109,7 @@ const PdfView = ({ url }: { url: string }) => {
                 size="icon"
               >
                 <div className="h-5 w-5">
-                  <RefreshCcwIcon size={16} className="m-auto" />
+                  <RotateCwIcon size={16} className="m-auto" />
                 </div>
                 <span className="sr-only">Refresh</span>
               </Button>
