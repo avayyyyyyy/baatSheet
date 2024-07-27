@@ -13,6 +13,7 @@ function useSubscription() {
   const { user } = useUser();
 
   const [hasActiveSubscription, setHasActiveSubscription] = useState(false);
+  const [subscriptionType, setSubscriptionType] = useState<string | null>(null);
   const [isFileLimitOver, setIsFileLimitOver] = useState(false);
   const [fetching, setFetching] = useState(true);
 
@@ -36,15 +37,16 @@ function useSubscription() {
     console.log("User subscription data: ", data);
 
     setHasActiveSubscription(data.hasActiveSubscription);
+    setSubscriptionType(data.subscriptionType || "free");
     setFetching(false);
     console.log(hasActiveSubscription);
   }, [snapshot]);
 
   useEffect(() => {
-    if (!fileSnapShot || hasActiveSubscription === null) return;
+    if (!fileSnapShot || subscriptionType === null) return;
 
     const files = fileSnapShot.docs;
-    const userLimit = hasActiveSubscription === "free" ? FREE_PLAN : PRO_PLAN;
+    const userLimit = subscriptionType === "free" ? FREE_PLAN : PRO_PLAN;
 
     console.log("User files: ", files);
     console.log("User limit: ", userLimit);
@@ -52,7 +54,7 @@ function useSubscription() {
     setIsFileLimitOver(files.length >= userLimit);
 
     console.log("isFileLimitOver: ", files.length >= userLimit);
-  }, [fileSnapShot, hasActiveSubscription]);
+  }, [fileSnapShot, subscriptionType]);
 
   return { hasActiveSubscription, isFileLimitOver, fetching, error };
 }
