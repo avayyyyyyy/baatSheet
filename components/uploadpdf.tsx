@@ -111,9 +111,9 @@ export function Uploadpdf() {
               <div className="text-[#fe640b]">Add a new document</div>
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[500px]">
+          <DialogContent className="md:max-w-[500px] w-[90vw] flex flex-col rounded-md">
             {isUploading || progress > 0 ? (
-              <div className="flex flex-col items-center justify-center gap-4 py-8">
+              <div className="flex flex-col items-center mx-auto px-2 justify-center gap-4 py-8">
                 <div className="flex items-center gap-2">
                   <CircleCheckIcon
                     className={`size-12 ${
