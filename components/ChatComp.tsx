@@ -14,6 +14,7 @@ import { askQuestion } from "@/actions/askQuestion";
 import "../app/globals.css";
 import Markdown from "react-markdown";
 import { toast } from "sonner";
+import Link from "next/link";
 
 export type Message = {
   role: "human" | "bot" | "placeholder";
@@ -156,9 +157,12 @@ const ChatComp = ({ id }: { id: string }) => {
     <div className="flex flex-col md:border-l-2 h-full md:w-[40%] border-t lg:border-l-2 lg:border-t-0 border-[#fe640b] bg-background p-6">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-2xl font-bold">Chat</h2>
-        <Button variant="outline" size="icon">
-          <div className="h-5 w-5">❤️</div>
-          <span className="sr-only">Like</span>
+        <Button asChild variant="outline" size="icon">
+          <Link href={"https://github.com/avayyyyyyy/baatsheet"}>
+            {" "}
+            <div className="h-5 w-5">❤️</div>
+            <span className="sr-only">Like</span>
+          </Link>
         </Button>
       </div>
       <div className="flex-1 overflow-auto" ref={chatContainerRef}>
