@@ -42,31 +42,30 @@ const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
             console.log("doc.data(): ", doc.data());
 
             return (
-              <Card
-                className="min-w-64 max-w-sm min-h-80 mx-2 mt-4 hover:bg-zinc-200 "
-                key={doc.id}
-              >
-                <CardContent className="p-4">
-                  <div>
-                    <h3 className="text-sm font-semibold">
-                      {name.slice(0, 20)}...
-                    </h3>
-                    <p>{byteSize(size).value} KB</p>
-                  </div>
-                  <div className="flex gap-2 items-center mt-4">
-                    <Button asChild variant={"default"} size={"icon"}>
-                      <Link
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Eye size={18} />
-                      </Link>
-                    </Button>
-                    <DeleteButton docId={doc.id} />
-                  </div>
-                </CardContent>
-              </Card>
+              <Link key={doc.id} href={`/dashboard/files/${doc.id}`}>
+                <Card className="min-w-64 max-w-sm min-h-80 mx-2 mt-4 hover:bg-zinc-200 ">
+                  <CardContent className="p-4">
+                    <div>
+                      <h3 className="text-sm font-semibold">
+                        {name.slice(0, 20)}...
+                      </h3>
+                      <p>{byteSize(size).value} KB</p>
+                    </div>
+                    <div className="flex gap-2 items-center mt-4">
+                      <Button asChild variant={"default"} size={"icon"}>
+                        <Link
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Eye size={18} />
+                        </Link>
+                      </Button>
+                      <DeleteButton docId={doc.id} />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             );
           })}
         </div>
