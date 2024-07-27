@@ -151,7 +151,7 @@ export function Uploadpdf() {
                 </DialogHeader>
                 <div className="mt-6 flex justify-center" {...getRootProps()}>
                   <div>
-                    <div className="flex bg-[#fe640b]/10 h-48 w-[90%] mx-auto md:w-full flex-col items-center justify-center rounded-md border-2 border-dashed border-[#fe640b] p-4 text-center">
+                    <div className="flex bg-[#fe640b]/10 h-48 w-[70%] mx-auto md:w-full flex-col items-center justify-center rounded-md border-2 border-dashed border-[#fe640b] p-4 text-center">
                       <input {...getInputProps()} />
                       {isDragActive ? (
                         <div className="w-96 flex items-center flex-col justify-center">
