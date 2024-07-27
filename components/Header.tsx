@@ -1,20 +1,33 @@
+"use client";
 import { SignedIn, UserButton } from "@clerk/nextjs";
 import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import { FilePlus2 } from "lucide-react";
+import { FilePlus2, FileText, Loader } from "lucide-react";
+import useSubscription from "./hooks/useSubscription";
 
 function Header() {
+  const { hasActiveSubscription, fetching } = useSubscription();
+
   return (
     <div className="border-b flex items-center justify-between px-9 py-2">
       <div className="text-3xl px-4 py-2">
-        <Link href={"/"}>
-          Baat<span className="text-[#fe640b] font-bold">Sheet</span>
+        <Link href={"/"} className="flex items-center space-x-1">
+          बात<span className="text-[#fe640b] font-bold">Sheet</span>
+          <FileText className="h-6 w-6" />
         </Link>
       </div>
       <div className="flex items-center gap-x-2">
         <Button asChild variant={"outline"} className="hidden md:block">
-          <Link href="/dashboard/pricing">Pricing</Link>
+          <Link href="/dashboard/pricing">
+            {fetching ? (
+              <>
+                <Loader className="animate-spin " size={18} />
+              </>
+            ) : (
+              <>{hasActiveSubscription ? "Pro Member 🚀" : "Buy Pro ✨"}</>
+            )}
+          </Link>
         </Button>
         <Button asChild variant={"outline"}>
           <Link href="/dashboard">My Documents</Link>

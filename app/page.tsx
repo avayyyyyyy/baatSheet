@@ -57,21 +57,20 @@ export default function Home() {
         <div className="text-[#fe640b] mb-1">
           Your Interactive Document Comparison
         </div>
-        <div className="font-bold md:text-5xl lg:text-7xl text-transparent bg-clip-text bg-gradient-to-br from-zinc-950 to-zinc-600 my-5 text-3xl">
-          Transform your PDF&apos;s into <br />
-          Interactive Conversations
+        <div className="font-bold md:pt-4 pt-1 md:text-5xl lg:text-7xl shrink-0 text-transparent bg-clip-text bg-gradient-to-br from-zinc-950 to-zinc-600 my-5 text-3xl">
+          बात-चीत with your PDFs <br />
+          in an super interactive way <span className="text-black">🚀</span>
         </div>
         <div className="my-5 font-medium text-lg">
           Introducing{" "}
           <Link href={"/"} className="text-[#fe640b] font-semibold underline ">
-            BaatSheet
+            बात-Sheet
           </Link>
         </div>
-        <div className="text-zinc-600 md:w-[70%] mx-auto">
-          Upload your document, and our chatbot will answer questions, summarize
-          content, and answer all your Qs. Ideal for everyone, Chat with PDF
-          turns static documents into dynamic conversations, enhancing
-          productivity 10x fold effortlessly.
+        <div className="text-zinc-600 md:w-[60%] mx-auto">
+          An interactive way to बात (talk) with your PDFs. Get started with our
+          app today and talk to your PDFs like never before with our intelligent
+          chatbot.
         </div>
         <div className="w-full flex">
           <Button asChild className="my-5 mx-auto">

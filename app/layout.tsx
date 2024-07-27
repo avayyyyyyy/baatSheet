@@ -25,7 +25,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <ClerkLoaded>{children}</ClerkLoaded>
         </body>
-        <Toaster richColors duration={5000} />
+        <Toaster richColors duration={3000} closeButton />
       </html>
     </ClerkProvider>
   );

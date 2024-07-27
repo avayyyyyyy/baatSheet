@@ -3,7 +3,7 @@ import { OpenAIEmbeddings } from "@langchain/openai";
 import { HumanMessage, AIMessage } from "@langchain/core/messages";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
-import { PDFLoader } from "langchain/document_loaders/fs/pdf";
+import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 import { PineconeStore } from "@langchain/pinecone";
 import { Index, RecordMetadata } from "@pinecone-database/pinecone";
 import { auth } from "@clerk/nextjs/server";
@@ -12,10 +12,12 @@ import { createRetrievalChain } from "langchain/chains/retrieval";
 import { createStuffDocumentsChain } from "langchain/chains/combine_documents";
 import { createHistoryAwareRetriever } from "langchain/chains/history_aware_retriever";
 import pineconeClient from "./pincone";
+import { ChatGroq } from "@langchain/groq";
 
-const model = new ChatOpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  modelName: "gpt-3.5-turbo",
+const model = new ChatGroq({
+  apiKey: process.env.GROQ_API_KEY,
+  model: "llama-3.1-70b-versatile",
+  temperature: 0.5,
 });
 
 export async function fetchMessageFromDB(docID: string) {

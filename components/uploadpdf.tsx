@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import {
   ArrowDownNarrowWide,
   CircleCheckIcon,
+  Frown,
   PlusCircleIcon,
   RocketIcon,
 } from "lucide-react";
@@ -20,9 +21,11 @@ import { useDropzone } from "react-dropzone";
 import { useCallback, useEffect, useRef } from "react";
 import { StatusText, useUpload } from "./hooks/useUpload";
 import { useRouter } from "next/navigation";
+import useSubscription from "./hooks/useSubscription";
 
 export function Uploadpdf() {
   const { progress, status, fileId, handleUpload, isUploading } = useUpload();
+  const { hasActiveSubscription, isFileLimitOver } = useSubscription();
   const router = useRouter();
   useEffect(() => {
     if (fileId) {
@@ -65,91 +68,111 @@ export function Uploadpdf() {
   const stepsDone = stepsDoneRef.current;
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button className="h-80 w-52 mr-3 mt-4 drop-shadow bg-[#fe640b]/10 border-2 border-[#fe640b] hover:bg-[#fe640b]/20 flex flex-col gap-y-1 text-[#fe640b]">
+    <div>
+      {!hasActiveSubscription || isFileLimitOver ? (
+        <Button
+          disabled
+          className="h-80 min-w-56 mr-3 mt-4 drop-shadow bg-[#fe640b]/10 border-2 border-[#fe640b] hover:bg-[#fe640b]/20 flex flex-col gap-y-1 text-[#fe640b]"
+        >
           <div>
-            <PlusCircleIcon />
+            <Frown />
           </div>
-          <div className="text-[#fe640b]">Add a new document</div>
+          <div className="text-[#fe640b]">
+            Sorry! <br />
+            You can&apos;t add more document.
+          </div>
         </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px]">
-        {isUploading || progress > 0 ? (
-          <div className="flex flex-col items-center justify-center gap-4 py-8">
-            <div className="flex items-center gap-2">
-              <CircleCheckIcon
-                className={`size-12 ${
-                  stepsDone >= 1 ? "text-orange-500" : "text-muted"
-                }`}
-              />
-              <CircleCheckIcon
-                className={`size-12 ${
-                  stepsDone >= 2 ? "text-orange-500" : "text-muted"
-                }`}
-              />
-              <CircleCheckIcon
-                className={`size-12 ${
-                  stepsDone >= 3 ? "text-orange-500" : "text-muted"
-                }`}
-              />
-              <CircleCheckIcon
-                className={`size-12 ${
-                  stepsDone >= 4 ? "text-orange-500" : "text-muted"
-                }`}
-              />
-            </div>
-            <p className="text-lg font-medium">Deployment in Progress</p>
-            <p className="text-sm text-center text-muted-foreground animate-pulse">
-              {status}
-            </p>
-          </div>
-        ) : (
-          <>
-            <DialogHeader>
-              <DialogTitle>Upload PDF Files</DialogTitle>
-              <DialogDescription>
-                Drag and drop your PDF files here or click to select.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="mt-6 flex justify-center" {...getRootProps()}>
-              <div>
-                <div className="flex bg-[#fe640b]/10 h-48 w-full flex-col items-center justify-center rounded-md border-2 border-dashed border-[#fe640b] p-4 text-center">
-                  <input {...getInputProps()} />
-                  {isDragActive ? (
-                    <div className="w-96  flex items-center flex-col justify-center">
-                      <RocketIcon className="h-10 w-10 text-[#fe640b] animate-bounce" />
-                      <p className="mt-4 text-sm font-medium text-[#fe640b]">
-                        Drop the files here...
-                      </p>
-                      <p className="mt-2 text-xs text-[#fe640b]">
-                        excited to read your docs 😙
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="w-96  flex items-center flex-col justify-center">
-                      <CloudUploadIcon className="h-10 w-10 text-[#fe640b]" />
-                      <p className="mt-4 text-sm font-medium text-[#fe640b]">
-                        Drag and drop files or click to upload
-                      </p>
-                      <p className="mt-2 text-xs text-[#fe640b]">
-                        Supported file types: PDF
-                      </p>
-                    </div>
-                  )}
+      ) : (
+        <Dialog>
+          <DialogTrigger asChild>
+            {hasActiveSubscription ? (
+              <Button className="h-80 w-52 mr-3 mt-4 drop-shadow bg-[#fe640b]/10 border-2 border-[#fe640b] hover:bg-[#fe640b]/20 flex flex-col gap-y-1 text-[#fe640b]">
+                <div>
+                  <PlusCircleIcon />
                 </div>
+                <div className="text-[#fe640b]">Add a new document</div>
+              </Button>
+            ) : (
+              <Button className="h-80 w-52 mr-3 mt-4 drop-shadow bg-[#fe640b]/10 border-2 border-[#fe640b] hover:bg-[#fe640b]/20 flex flex-col gap-y-1 text-[#fe640b]">
+                <div>
+                  <PlusCircleIcon />
+                </div>
+                <div className="text-[#fe640b]">Add a new document</div>
+              </Button>
+            )}
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[500px]">
+            {isUploading || progress > 0 ? (
+              <div className="flex flex-col items-center justify-center gap-4 py-8">
+                <div className="flex items-center gap-2">
+                  <CircleCheckIcon
+                    className={`size-12 ${
+                      stepsDone >= 1 ? "text-orange-500" : "text-muted"
+                    }`}
+                  />
+                  <CircleCheckIcon
+                    className={`size-12 ${
+                      stepsDone >= 2 ? "text-orange-500" : "text-muted"
+                    }`}
+                  />
+                  <CircleCheckIcon
+                    className={`size-12 ${
+                      stepsDone >= 3 ? "text-orange-500" : "text-muted"
+                    }`}
+                  />
+                  <CircleCheckIcon
+                    className={`size-12 ${
+                      stepsDone >= 4 ? "text-orange-500" : "text-muted"
+                    }`}
+                  />
+                </div>
+                <p className="text-lg font-medium">Deployment in Progress</p>
+                <p className="text-sm text-center text-muted-foreground animate-pulse">
+                  {status}
+                </p>
               </div>
-            </div>
-          </>
-        )}
-
-        {/* <DialogFooter>
-          <div>
-            <Button variant="default">Submit</Button>
-          </div>
-        </DialogFooter> */}
-      </DialogContent>
-    </Dialog>
+            ) : (
+              <>
+                <DialogHeader>
+                  <DialogTitle>Upload PDF Files</DialogTitle>
+                  <DialogDescription>
+                    Drag and drop your PDF files here or click to select.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="mt-6 flex justify-center" {...getRootProps()}>
+                  <div>
+                    <div className="flex bg-[#fe640b]/10 h-48 w-full flex-col items-center justify-center rounded-md border-2 border-dashed border-[#fe640b] p-4 text-center">
+                      <input {...getInputProps()} />
+                      {isDragActive ? (
+                        <div className="w-96  flex items-center flex-col justify-center">
+                          <RocketIcon className="h-10 w-10 text-[#fe640b] animate-bounce" />
+                          <p className="mt-4 text-sm font-medium text-[#fe640b]">
+                            Drop the files here...
+                          </p>
+                          <p className="mt-2 text-xs text-[#fe640b]">
+                            excited to read your docs 😙
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="w-96  flex items-center flex-col justify-center">
+                          <CloudUploadIcon className="h-10 w-10 text-[#fe640b]" />
+                          <p className="mt-4 text-sm font-medium text-[#fe640b]">
+                            Drag and drop files or click to upload
+                          </p>
+                          <p className="mt-2 text-xs text-[#fe640b]">
+                            Supported file types: PDF
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+          </DialogContent>
+        </Dialog>
+      )}
+    </div>
   );
 }
 

@@ -13,6 +13,7 @@ import Footer from "./Footer";
 import { askQuestion } from "@/actions/askQuestion";
 import "../app/globals.css";
 import Markdown from "react-markdown";
+import { toast } from "sonner";
 
 export type Message = {
   role: "human" | "bot" | "placeholder";
@@ -59,15 +60,7 @@ const ChatComp = ({ id }: { id: string }) => {
     startTransition(async () => {
       const { success, message } = await askQuestion(id, inp);
       if (!success) {
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: "bot",
-            message:
-              "Sorry, I couldn't understand that. Can you please rephrase?",
-            createdAt: new Date(),
-          },
-        ]);
+        toast.error(message);
       }
 
       setMessages((prev) =>
