@@ -59,7 +59,7 @@ const PdfView = ({ url }: { url: string }) => {
       ) : (
         <div className="flex w-[90vw] md:w-[50vw] h-full mx-auto overflow-hidden flex-col">
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="md:text-xl text-base font-semibold">
+            <h2 className="md:text-xl text-sm font-semibold">
               Chat with your PDF your Way...
             </h2>
 
