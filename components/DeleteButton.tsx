@@ -14,15 +14,21 @@ import {
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
 import { Button } from "./ui/button";
-import { Trash } from "lucide-react";
+import { Loader, Trash } from "lucide-react";
 import { deleteDocument } from "@/actions/deleteDocument";
 
 const DeleteButton = ({ docId }: { docId: string }) => {
-  const { hasActiveSubscription } = useSubscription();
+  const { hasActiveSubscription, fetching } = useSubscription();
 
   return (
     <div>
-      {hasActiveSubscription ? (
+      {fetching ? (
+        <>
+          <Button variant="default">
+            <Loader className="animate-spin" size={18} />
+          </Button>
+        </>
+      ) : hasActiveSubscription ? (
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button variant="default">
