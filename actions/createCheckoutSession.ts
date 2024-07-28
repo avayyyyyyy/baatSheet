@@ -17,10 +17,10 @@ export async function createCheckoutSession(userDetails: UserDetails) {
     const userDoc = await adminDB.collection("users").doc(userId).get();
     let stripeCustomerId = userDoc.data()?.stripeCustomerId;
 
-    console.log("stripeCustomerId from Firestore: ", stripeCustomerId);
+    // console.log("stripeCustomerId from Firestore: ", stripeCustomerId);
 
     if (!stripeCustomerId) {
-      console.log("Creating new customer in Stripe...");
+      // console.log("Creating new customer in Stripe...");
 
       const customer = await stripe.customers.create({
         email: userDetails.email,
@@ -38,17 +38,16 @@ export async function createCheckoutSession(userDetails: UserDetails) {
 
       stripeCustomerId = customer.id;
 
-      console.log("New stripeCustomerId created: ", stripeCustomerId);
+      // console.log("New stripeCustomerId created: ", stripeCustomerId);
 
       // Update the Firestore document
       await adminDB.collection("users").doc(userId).set({
         stripeCustomerId: stripeCustomerId,
       });
-      console.log("stripeCustomerId saved to Firestore");
+      // console.log("stripeCustomerId saved to Firestore");
     }
 
-    console.log("Creating new checkout session...");
-    console.log(process.env.VERCEL_URL);
+    // console.log("Creating new checkout session...");
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -72,7 +71,7 @@ export async function createCheckoutSession(userDetails: UserDetails) {
       },
     });
 
-    console.log("Checkout session created: ", session.id);
+    // console.log("Checkout session created: ", session.id);
 
     return session.id;
   } catch (error) {

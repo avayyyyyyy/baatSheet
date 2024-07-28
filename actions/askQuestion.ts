@@ -28,7 +28,7 @@ export async function askQuestion(id: string, ques: string) {
   const userRef = await adminDB.collection("users").doc(userId!).get();
 
   if (!userRef.data()?.hasActiveSubscription) {
-    console.log("userMessages: " + userMessages.length);
+    // console.log("userMessages: " + userMessages.length);
 
     if (userMessages.length >= FREE_LIMIT) {
       return {

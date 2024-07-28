@@ -75,7 +75,7 @@ const ChatComp = ({ id }: { id: string }) => {
       );
     });
 
-    console.log("Submitted", message);
+    // console.log("Submitted", message);
   };
 
   useEffect(() => {
@@ -100,7 +100,7 @@ const ChatComp = ({ id }: { id: string }) => {
 
     setMessages(newMessages);
 
-    console.log("Updated snapshot list: ", snapshot.docs);
+    // console.log("Updated snapshot list: ", snapshot.docs);
   }, [snapshot]);
 
   // Scroll to the bottom whenever messages change

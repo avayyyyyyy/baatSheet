@@ -42,10 +42,12 @@ export function Uploadpdf() {
       if (file) {
         await handleUpload(file);
       }
-      console.log(acceptedFiles[0]);
+      // console.log(acceptedFiles[0]);
     },
     [handleUpload]
   );
+
+  // console.log("Is File Limit Over: ", isFileLimitOver);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -73,6 +75,8 @@ export function Uploadpdf() {
 
   const stepsDone = stepsDoneRef.current;
 
+  // console.log(hasActiveSubscription, isFileLimitOver);
+
   return (
     <div>
       {fetching ? (
@@ -88,7 +92,7 @@ export function Uploadpdf() {
             Please wait for a moment.
           </div>
         </Button>
-      ) : !hasActiveSubscription || isFileLimitOver ? (
+      ) : !hasActiveSubscription && isFileLimitOver ? (
         <Button
           disabled
           className="h-80 min-w-56 mr-3 mt-4 drop-shadow bg-[#fe640b]/10 border-2 border-[#fe640b] hover:bg-[#fe640b]/20 flex flex-col gap-y-1 text-[#fe640b]"

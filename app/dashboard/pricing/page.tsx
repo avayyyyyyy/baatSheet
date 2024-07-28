@@ -76,13 +76,13 @@ const Pricing = () => {
       if (hasActiveSubscription) {
         const stripePortal = await createStripePortal();
         const createCheckoutSession = stripePortal;
-        console.log("stripePortal: ", stripePortal);
+        // console.log("stripePortal: ", stripePortal);
         return router.push(createCheckoutSession);
       }
 
       const sessionId = await createCheckoutSession(userDetail);
 
-      console.log("sessionId: ", sessionId);
+      // console.log("sessionId: ", sessionId);
 
       await stripe?.redirectToCheckout({
         sessionId: sessionId!,

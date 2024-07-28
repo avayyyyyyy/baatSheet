@@ -31,7 +31,10 @@ const DeleteButton = ({ docId }: { docId: string }) => {
       ) : hasActiveSubscription ? (
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="default">
+            <Button
+              className="border border-white hover:bg-white hover:text-orange-500"
+              variant="default"
+            >
               <Trash size={18} />
             </Button>
           </AlertDialogTrigger>

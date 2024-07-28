@@ -42,8 +42,8 @@ export async function fetchMessageFromDB(docID: string) {
       : new AIMessage(doc.data().message)
   );
 
-  console.log(`Fetched ${chatHistory.length} messages from the database`);
-  console.log(chatHistory.map((msg) => msg.content.toString()));
+  // console.log(`Fetched ${chatHistory.length} messages from the database`);
+  // console.log(chatHistory.map((msg) => msg.content.toString()));
   return chatHistory;
 }
 
@@ -63,31 +63,31 @@ export async function generateDocs(docID: string) {
 
   const downloadURL = docRef.data()?.url;
 
-  console.log(docRef.data()?.url);
+  // console.log(docRef.data()?.url);
 
   if (!downloadURL) {
     throw new Error("Download URL not found");
   }
 
-  console.log("----Download URL Found Successfully----");
+  // console.log("----Download URL Found Successfully----");
 
   const response = await fetch(downloadURL);
 
   const data = await response.blob();
 
-  console.log("----Loading PDF Document----");
+  // console.log("----Loading PDF Document----");
 
   const pdfLoader = new PDFLoader(data);
 
   const docs = await pdfLoader.load();
 
-  console.log("----Splitting Document into smaller chunks----");
+  // console.log("----Splitting Document into smaller chunks----");
 
   const splitter = new RecursiveCharacterTextSplitter();
 
   const chunks = await splitter.splitDocuments(docs);
 
-  console.log(`----Splitting Done, ${chunks.length} chunks found----`);
+  // console.log(`----Splitting Done, ${chunks.length} chunks found----`);
 
   return chunks;
 }
@@ -116,7 +116,7 @@ export async function generateEmbeddingsInPineconeVectorDB(docID: string) {
 
   let pineconeVectorStore;
 
-  console.log("----Generating Embeddings in Pinecone Vector DB----");
+  // console.log("----Generating Embeddings in Pinecone Vector DB----");
 
   const embeddings = new OpenAIEmbeddings({
     model: "text-embedding-ada-002",
@@ -127,9 +127,9 @@ export async function generateEmbeddingsInPineconeVectorDB(docID: string) {
   const nameSpaceAlreadyExists = await namespaceExists(index, docID);
 
   if (nameSpaceAlreadyExists) {
-    console.log(
-      `---Namespace ${docID} already exists, reusing existing embeddings...---`
-    );
+    // console.log(
+    //   `---Namespace ${docID} already exists, reusing existing embeddings...---`
+    // );
     pineconeVectorStore = await PineconeStore.fromExistingIndex(embeddings, {
       pineconeIndex: index,
       namespace: docID,
@@ -138,9 +138,9 @@ export async function generateEmbeddingsInPineconeVectorDB(docID: string) {
   } else {
     const splitDocs = await generateDocs(docID);
 
-    console.log(
-      `Storing the embeddings in ${docID} in the ${indexName} Pinecone Vector DB`
-    );
+    // console.log(
+    // `Storing the embeddings in ${docID} in the ${indexName} Pinecone Vector DB`
+    // );
 
     pineconeVectorStore = await PineconeStore.fromDocuments(
       splitDocs,
@@ -158,12 +158,12 @@ const generateLangchainCompletion = async (docID: string, question: string) => {
   let pineconeStore;
 
   pineconeStore = await generateEmbeddingsInPineconeVectorDB(docID);
-  console.log("----Creating Langchain Retriever----");
+  // console.log("----Creating Langchain Retriever----");
   const retrievalChain = pineconeStore.asRetriever();
 
   const chatHistory = await fetchMessageFromDB(docID);
 
-  console.log("Defining a prompt template");
+  // console.log("Defining a prompt template");
 
   const historyAwarePromptTemplate = ChatPromptTemplate.fromMessages([
     ...chatHistory,
@@ -180,7 +180,7 @@ const generateLangchainCompletion = async (docID: string, question: string) => {
     rephrasePrompt: historyAwarePromptTemplate,
   });
 
-  console.log("---Defining a prompt template to answer the question---");
+  // console.log("---Defining a prompt template to answer the question---");
 
   const questionPromptTemplate = ChatPromptTemplate.fromMessages([
     [
@@ -196,7 +196,7 @@ const generateLangchainCompletion = async (docID: string, question: string) => {
     prompt: questionPromptTemplate,
   });
 
-  console.log("Creating the main retrieval chain");
+  // console.log("Creating the main retrieval chain");
 
   const conversationalRetrievalChain = await createRetrievalChain({
     retriever: historyAwareRetrieverChain,
@@ -208,7 +208,7 @@ const generateLangchainCompletion = async (docID: string, question: string) => {
     input: question,
   });
 
-  console.log(result);
+  // console.log(result);
   return result.answer;
 };
 

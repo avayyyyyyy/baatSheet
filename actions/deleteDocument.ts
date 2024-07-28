@@ -30,7 +30,7 @@ export async function deleteDocument(docId: string) {
   const index = pineconeClient.index(indexName);
   await index.namespace(docId).deleteAll();
 
-  console.log("Deleted document with id: ", docId);
+  // console.log("Deleted document with id: ", docId);
 
   revalidatePath("/dashboard");
 }

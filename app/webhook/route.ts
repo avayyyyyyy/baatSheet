@@ -7,15 +7,15 @@ export async function POST(req: NextRequest) {
   const body = await req.text();
   const signature = req.headers.get("stripe-signature");
 
-  console.log("Signature:", signature);
+  // console.log("Signature:", signature);
 
   if (!signature) {
-    console.log("No signature found");
+    // console.log("No signature found");
     return NextResponse.json({ message: "No signature" }, { status: 400 });
   }
 
   if (!process.env.STRIPE_WEBHOOK_SECRET) {
-    console.log("No webhook secret found");
+    // console.log("No webhook secret found");
     return NextResponse.json({ message: "No webhook secret" }, { status: 400 });
   }
 
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
       signature,
       process.env.STRIPE_WEBHOOK_SECRET
     );
-    console.log("Event:", event);
+    // console.log("Event:", event);
   } catch (err) {
     console.error("Error constructing event:", err);
     return NextResponse.json(
@@ -43,12 +43,12 @@ export async function POST(req: NextRequest) {
         .where("stripeCustomerId", "==", customerID)
         .limit(1)
         .get();
-      console.log("User details:", userDetails);
+      // console.log("User details:", userDetails);
 
       if (!userDetails.empty) {
         return userDetails.docs[0];
       } else {
-        console.log("No user found with the provided Stripe customer ID");
+        // console.log("No user found with the provided Stripe customer ID");
       }
     } catch (err) {
       console.error("Error fetching user details:", err);
@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
         const customerID = invoice.customer as string;
         const userDetails = await getCustomerId(customerID);
         if (!userDetails) {
-          console.log("No user found");
+          // console.log("No user found");
           return NextResponse.json(
             { message: "No user found" },
             { status: 404 }
@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
         await adminDB.collection("users").doc(userDetails.id).update({
           hasActiveSubscription: true,
         });
-        console.log("Subscription updated to active for user:", userDetails.id);
+        // console.log("Subscription updated to active for user:", userDetails.id);
       } catch (err) {
         console.error("Error updating subscription to active:", err);
         return NextResponse.json(
@@ -90,7 +90,7 @@ export async function POST(req: NextRequest) {
         const customerID = subscription.customer as string;
         const userDetails = await getCustomerId(customerID);
         if (!userDetails) {
-          console.log("No user found");
+          // console.log("No user found");
           return NextResponse.json(
             { message: "No user found" },
             { status: 404 }
@@ -100,10 +100,10 @@ export async function POST(req: NextRequest) {
         await adminDB.collection("users").doc(userDetails.id).update({
           hasActiveSubscription: false,
         });
-        console.log(
-          "Subscription updated to inactive for user:",
-          userDetails.id
-        );
+        // console.log(
+        //   "Subscription updated to inactive for user:",
+        //   userDetails.id
+        // );
       } catch (err) {
         console.error("Error updating subscription to inactive:", err);
         return NextResponse.json(
@@ -114,9 +114,9 @@ export async function POST(req: NextRequest) {
       break;
 
     default:
-      console.log(`Unhandled event type ${event.type}`);
+    // console.log(`Unhandled event type ${event.type}`);
   }
 
-  console.log(`Webhook received: ${event.id}`);
+  // console.log(`Webhook received: ${event.id}`);
   return NextResponse.json({ message: "Webhook received" }, { status: 200 });
 }

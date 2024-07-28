@@ -35,7 +35,7 @@ const PdfView = ({ url }: { url: string }) => {
         }
         const fileRes = await response.blob();
         setFile(fileRes);
-        console.log(fileRes);
+        // console.log(fileRes);
       } catch (error) {
         console.error("Failed to fetch the PDF file:", error);
       }
@@ -47,8 +47,8 @@ const PdfView = ({ url }: { url: string }) => {
     setNumPages(numPages);
   };
 
-  console.log("numPages: ", numPages);
-  console.log("pageNumber: ", pageNumber);
+  // console.log("numPages: ", numPages);
+  // console.log("pageNumber: ", pageNumber);
 
   return (
     <div className="h-full w-fit">

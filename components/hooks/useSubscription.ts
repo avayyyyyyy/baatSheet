@@ -29,32 +29,41 @@ function useSubscription() {
   );
 
   useEffect(() => {
-    if (!snapshot) return;
+    if (loading) return; // Ensure loading state is checked
+    if (!snapshot) {
+      setFetching(false); // Set fetching to false if no snapshot
+      return;
+    }
     const data = snapshot.data();
+    if (!data) {
+      setFetching(false); // Set fetching to false if no data
+      return;
+    }
 
-    if (!data) return;
-
-    console.log("User subscription data: ", data);
+    // console.log("User subscription data: ", data);
 
     setHasActiveSubscription(data.hasActiveSubscription);
     setSubscriptionType(data.subscriptionType || "free");
     setFetching(false);
-    console.log(hasActiveSubscription);
-  }, [snapshot]);
+  }, [snapshot, loading]);
 
   useEffect(() => {
-    if (!fileSnapShot || subscriptionType === null) return;
+    if (fileLoading || subscriptionType === null) return; // Ensure file loading state is checked
+    if (!fileSnapShot) {
+      setFetching(false); // Set fetching to false if no file snapshot
+      return;
+    }
 
     const files = fileSnapShot.docs;
     const userLimit = subscriptionType === "free" ? FREE_PLAN : PRO_PLAN;
 
-    console.log("User files: ", files);
-    console.log("User limit: ", userLimit);
+    // console.log("User files: ", files.length);
+    // console.log("User limit: ", userLimit);
 
     setIsFileLimitOver(files.length >= userLimit);
 
-    console.log("isFileLimitOver: ", files.length >= userLimit);
-  }, [fileSnapShot, subscriptionType]);
+    // console.log("isFileLimitOver hooks: ", files.length >= userLimit);
+  }, [fileSnapShot, fileLoading, subscriptionType]);
 
   return { hasActiveSubscription, isFileLimitOver, fetching, error };
 }

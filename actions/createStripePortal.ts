@@ -26,7 +26,7 @@ export async function createStripePortal() {
     return_url: `https://baat-sheet.vercel.app/dashboard`,
   });
 
-  console.log("Session: ", session);
+  // console.log("Session: ", session);
 
   return session.url;
 }
