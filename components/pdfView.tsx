@@ -51,14 +51,14 @@ const PdfView = ({ url }: { url: string }) => {
   // console.log("pageNumber: ", pageNumber);
 
   return (
-    <div className="h-full w-fit">
+    <div className="h-full  mb-10">
       {!file ? (
         <div className="flex w-full flex-col h-full justify-center items-center">
           <LoaderIcon className="animate-spin h-20 w-20 text-[#fe640b]" />
           <p className="animate-pulse mt-2">Loading your PDF...</p>
         </div>
       ) : (
-        <div className="flex w-[90vw] md:w-[50vw] h-full mx-auto overflow-hidden flex-col">
+        <div className="flex w-[90vw] md:w-fit h-fit mx-auto flex-col">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="md:text-xl text-sm font-semibold">
               Chat with your PDF...
@@ -115,8 +115,8 @@ const PdfView = ({ url }: { url: string }) => {
               </Button>
             </div>
           </div>
-          <div className="flex-1 rounded-lg p-2 border">
-            <div className="mx-auto border-2 overflow-scroll">
+          <div className="flex-1 rounded-lg p-2 border h-full">
+            <div className="mx-auto h-fit border-2 overflow-scroll">
               <Document
                 file={file}
                 loading={null}
