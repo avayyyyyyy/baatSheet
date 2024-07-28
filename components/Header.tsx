@@ -11,14 +11,14 @@ function Header() {
 
   return (
     <div className="border-b flex items-center justify-between px-9 py-2">
-      <div className="text-3xl px-4 py-2">
+      <div className="md:text-3xl text-xl px-4 py-2">
         <Link href={"/"} className="flex items-center space-x-1">
           बात<span className="text-[#fe640b] font-bold">Sheet</span>
           <FileText className="h-6 w-6" />
         </Link>
       </div>
       <div className="flex items-center gap-x-2">
-        <Button asChild variant={"outline"} className="hidden md:block">
+        <Button asChild variant={"outline"} className="md:block hidden">
           <Link href="/dashboard/pricing">
             {fetching ? (
               <>
@@ -26,6 +26,22 @@ function Header() {
               </>
             ) : (
               <>{hasActiveSubscription ? "Pro Member 🚀" : "Buy Pro ✨"}</>
+            )}
+          </Link>
+        </Button>
+        <Button
+          asChild
+          variant={"outline"}
+          size={"sm"}
+          className="md:hidden flex"
+        >
+          <Link href="/dashboard/pricing">
+            {fetching ? (
+              <>
+                <Loader className="animate-spin " size={18} />
+              </>
+            ) : (
+              <>{hasActiveSubscription ? "Pro 🚀" : "Buy Pro ✨"}</>
             )}
           </Link>
         </Button>
