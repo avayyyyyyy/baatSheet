@@ -45,8 +45,11 @@ function Header() {
             )}
           </Link>
         </Button>
-        <Button asChild variant={"outline"}>
+        <Button asChild className="md:flex hidden" variant={"outline"}>
           <Link href="/dashboard">My Documents</Link>
+        </Button>
+        <Button asChild className="md:hidden flex" variant={"outline"}>
+          <Link href="/dashboard">My Docs</Link>
         </Button>
         {/* <Button asChild variant={"outline"} className="border-[#fe640b]">
           <Link href="/dashboard/uploads">
