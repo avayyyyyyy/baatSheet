@@ -54,6 +54,19 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center text-left md:text-center justify-between p-3 bg-gradient-to-r from-[#fe640b] to-[#fe640b]/20 ">
       <div className="bg-white rounded-md md:pt-28 pt-10 p-5 w-full shadow-2xl h-full text-sm">
+        <div className="w-full flex items-center justify-center mb-6">
+          <Link
+            className="mx-auto"
+            href={"https://peerlist.io/avayyyyyyy/project/sheet"}
+          >
+            <Image
+              src={"https://peerlist.io/images/Launch_Badge_Light.svg"}
+              width={150}
+              height={150}
+              alt="peerlist"
+            />
+          </Link>
+        </div>
         <div className="text-[#fe640b] mb-1">
           Your Interactive Document Comparison
         </div>
