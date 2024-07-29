@@ -19,7 +19,7 @@ const pricingPlans = [
     features: [
       "Chat with up to 5 PDFs",
       "Basic AI response",
-      "Limited to 100 queries per month",
+      "Limited to 5 queries per month",
       "No support",
       "No document deletion",
     ],
