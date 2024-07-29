@@ -19,7 +19,7 @@ const pricingPlans = [
     features: [
       "Chat with up to 5 PDFs",
       "Basic AI response",
-      "Limited to 5 queries per month",
+      "Limited to 5 queries per document",
       "No support",
       "No document deletion",
     ],
@@ -27,7 +27,7 @@ const pricingPlans = [
   {
     name: "Pro",
     description: "Unlock advanced features for more intensive use.",
-    monthlyPrice: 19.99,
+    monthlyPrice: 11.99,
     link: "https://github.com/ansub/syntaxUI",
     features: [
       "Chat with up to 20 PDFs",
