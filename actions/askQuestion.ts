@@ -33,7 +33,7 @@ export async function askQuestion(id: string, ques: string) {
     if (userMessages.length >= FREE_LIMIT) {
       return {
         success: false,
-        message: `You have reached the free limit of **2** questions. Please upgrade to **PRO** to ask more questions. 🥲`,
+        message: `You have reached the free limit of **5** questions. Please upgrade to **PRO** to ask more questions. 🥲`,
       };
     }
     if (userMessages.length >= PRO_LIMIT) {
