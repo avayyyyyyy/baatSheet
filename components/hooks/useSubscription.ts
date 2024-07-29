@@ -6,7 +6,7 @@ import { collection, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useCollection, useDocument } from "react-firebase-hooks/firestore";
 
-const FREE_PLAN = 2;
+const FREE_PLAN = 5;
 const PRO_PLAN = 20;
 
 function useSubscription() {

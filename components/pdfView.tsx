@@ -58,7 +58,7 @@ const PdfView = ({ url }: { url: string }) => {
           <p className="animate-pulse mt-2">Loading your PDF...</p>
         </div>
       ) : (
-        <div className="flex w-[90vw] md:w-fit h-fit mx-auto flex-col">
+        <div className="flex w-[90vw] md:w-fit md:min-w-96 h-fit mx-auto flex-col">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="md:text-xl text-sm font-semibold">
               Chat with your PDF...

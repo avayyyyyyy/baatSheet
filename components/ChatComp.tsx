@@ -128,7 +128,7 @@ const ChatComp = ({ id }: { id: string }) => {
             </AvatarFallback>
           </Avatar>
         )}
-        <div className={`grid w-fit gap-1 ${isHuman ? "text-right" : ""}`}>
+        <div className={`grid w-full gap-1 ${isHuman ? "text-right" : ""}`}>
           <div className="font-medium">
             {isHuman ? user.user?.firstName : "BaatSheet"}
           </div>
