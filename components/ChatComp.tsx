@@ -164,7 +164,7 @@ const ChatComp = ({ id }: { id: string }) => {
         <Button asChild variant="outline" size="icon">
           <Link href={"https://buymeacoffee.com/shubhankit"}>
             {" "}
-            <span className="h-5 w-5 m-auto">🧡</span>
+            <span className="h-5 w-5 m-auto">❤️</span>
             <span className="sr-only">Like</span>
           </Link>
         </Button>

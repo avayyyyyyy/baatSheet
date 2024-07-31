@@ -1,4 +1,11 @@
+import { HandHeart } from "lucide-react";
 import React from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 const GitHubIcon = (props: React.ComponentPropsWithoutRef<"svg">) => {
   return (
@@ -39,7 +46,7 @@ const SocialLink = ({
 
 const Footer = () => {
   return (
-    <div className="flex w-full flex-col items-center justify-between gap-5 border-t border-[#fe640b]/5 sm:flex-row dark:border-white/5">
+    <div className="flex w-full flex-col pt-4 items-center justify-between gap-5 border-t border-[#fe640b]/5 sm:flex-row dark:border-white/5">
       <p className="text-xs text-black dark:text-[#000]">
         Copyright © {new Date().getFullYear()}{" "}
         <a
@@ -50,6 +57,21 @@ const Footer = () => {
         </a>{" "}
       </p>
       <div className="flex gap-4">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <SocialLink
+                href="https://buymeacoffee.com/shubhankit"
+                icon={HandHeart}
+              >
+                Support Me
+              </SocialLink>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Support Me 🧡</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
         <SocialLink href="https://twitter.com/shubhcodes" icon={XIcon}>
           Follow me on X
         </SocialLink>
