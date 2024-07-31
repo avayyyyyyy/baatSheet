@@ -100,7 +100,7 @@ export default function Home() {
         </div>
         <div className="relative flex max-w-6xl items-center mx-auto justify-center overflow-hidden">
           <Image
-            src="https://utfs.io/f/0ecba989-149d-482a-81b0-dbfc66ee31c8-kzh7f9.webp"
+            src="https://utfs.io/f/2f8785eb-28ab-461d-bf1f-1dc8b99f95e6-6e7val.png"
             alt="hero-section"
             className="h-full w-[90%] border-[#fe640b] rounded-lg object-cover md:w-[1300px]"
             style={{

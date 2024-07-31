@@ -164,7 +164,7 @@ const ChatComp = ({ id }: { id: string }) => {
   };
 
   return (
-    <div className="lg:h-[90vh] h-[50vh] flex flex-col">
+    <div className="lg:h-[90vh] min-h-[50vh] max-h-[90vh] flex flex-col">
       <div className="mb-4 flex items-center border-b pb-2 justify-between">
         <h2 className="text-2xl font-bold">Chat</h2>
         <TooltipProvider>
