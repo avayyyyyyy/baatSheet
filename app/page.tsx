@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
 import {
   ZapIcon,
   GlobeIcon,
@@ -10,6 +11,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { auth } from "@clerk/nextjs/server";
 
 const features = [
   {
@@ -51,6 +53,12 @@ const features = [
 ];
 
 export default function Home() {
+  const { userId } = auth();
+
+  if (userId) {
+    redirect("/dashboard");
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center text-left md:text-center justify-between p-3 bg-gradient-to-r from-[#fe640b] to-[#fe640b]/20 ">
       <div className="bg-white rounded-md md:pt-28 pt-10 p-5 w-full shadow-2xl h-full text-sm">
@@ -81,9 +89,9 @@ export default function Home() {
           </Link>
         </div>
         <div className="text-zinc-600 md:w-[60%] lg:w-[40%] mx-auto">
-          An interactive way to बात (talk) with your PDFs. Get started with our
-          app today and talk to your PDFs like never before with our intelligent
-          chatbot.
+          An interactive way to बात (talk) with your PDF&apos;s. Get started
+          with our app today and talk to your PDFs like never before with our
+          intelligent chatbot.
         </div>
         <div className="w-full flex">
           <Button asChild className="my-5 mx-auto">
@@ -92,11 +100,11 @@ export default function Home() {
         </div>
         <div className="relative flex max-w-6xl items-center mx-auto justify-center overflow-hidden">
           <Image
-            src="https://utfs.io/f/8650e424-4623-4b52-9f6f-be634bf05cbe-sgqkmj.webp"
+            src="https://utfs.io/f/0ecba989-149d-482a-81b0-dbfc66ee31c8-kzh7f9.webp"
             alt="hero-section"
             className="h-full w-[90%] border-[#fe640b] rounded-lg object-cover md:w-[1300px]"
             style={{
-              maskImage: `linear-gradient(to top, transparent, black 70%)`,
+              maskImage: `linear-gradient(to top, transparent, black 100%)`,
             }}
             width={700}
             height={700}

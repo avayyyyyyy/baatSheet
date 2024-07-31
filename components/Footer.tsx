@@ -27,7 +27,7 @@ const XIcon = (props: React.ComponentPropsWithoutRef<"svg">) => {
   );
 };
 
-const SocialLink = ({
+export const SocialLink = ({
   href,
   icon: Icon,
   children,

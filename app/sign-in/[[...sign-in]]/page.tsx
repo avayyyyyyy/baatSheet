@@ -1,43 +1,53 @@
 "use client";
-
+// Import the necessary components
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import * as Clerk from "@clerk/elements/common";
 import * as SignIn from "@clerk/elements/sign-in";
-import { useSession } from "@clerk/nextjs";
-import { ChromeIcon, GithubIcon } from "lucide-react";
+import { ClerkProvider, useSession } from "@clerk/nextjs";
+import { ChromeIcon, FileText, GithubIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner";
 
 export default function SignInPage() {
   const user = useSession();
   const router = useRouter();
+  const [email, setEmail] = useState("");
 
   if (user.isSignedIn) {
     router.push("/dashboard");
   }
 
   return (
-    <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-[100vh] flex-col items-center justify-center bg-gray-50 px-4 py-12 sm:px-10 lg:px-8">
       <div className="mx-auto max-w-md space-y-6 border p-5 rounded-md shadow-md">
         <SignIn.Root>
           <SignIn.Step name="start">
             <div className="space-y-2 text-center">
-              <Image
+              {/* <Image
                 src="https://static.vecteezy.com/system/resources/previews/017/197/488/original/pdf-icon-on-transparent-background-free-png.png"
                 alt="BaatSheet Logo"
                 width={64}
                 height={64}
                 className="rounded-full mx-auto"
-              />
+              /> */}
+              <Link
+                href={"/"}
+                className="flex text-2xl justify-center bg-zinc-100 p-2 rounded-md items-center space-x-1"
+              >
+                बात<span className="text-[#fe640b] font-bold">Sheet</span>
+                {/* <FileText className="h-6 w-6" /> */}
+              </Link>
               <h1 className="text-2xl font-bold text-gray-900">
-                Welcome to{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-br from-orange-500 to-orange-400">
+                Welcome Back 👋🏻
+                {/* <span className="text-transparent bg-clip-text bg-gradient-to-br from-orange-500 to-orange-400">
                   BaatSheet!
-                </span>
+                </span> */}
               </h1>
               <p className="text-gray-600 text-sm">
                 Sign in to your account to continue...
@@ -64,6 +74,7 @@ export default function SignInPage() {
                   <Input
                     id="email"
                     type="email"
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="shubhcodes@mail.com"
                     required
                   />
@@ -73,9 +84,13 @@ export default function SignInPage() {
               <SignIn.Action submit>
                 <Button
                   onClick={() => {
-                    toast.success(
-                      "Magic Link has been successfully sent to your email, Please check your inbox!"
-                    );
+                    if (email === "") {
+                      toast.error("Email cannot be empty!");
+                    } else {
+                      toast.success(
+                        "Magic Link has been successfully sent to your email, Please check your inbox!"
+                      );
+                    }
                   }}
                   className="w-96 mt-3 flex items-center justify-center space-x-2"
                 >

@@ -8,13 +8,19 @@ import { useUser } from "@clerk/nextjs";
 import { db } from "@/firebase";
 import { Button } from "./ui/button";
 import { AvatarFallback, AvatarImage } from "./ui/avatar";
-import { BotIcon, LoaderIcon, Send } from "lucide-react";
-import Footer from "./Footer";
+import { BotIcon, HandHeart, LoaderIcon, Send } from "lucide-react";
+import Footer, { SocialLink } from "./Footer";
 import { askQuestion } from "@/actions/askQuestion";
 import "../app/globals.css";
 import Markdown from "react-markdown";
 import { toast } from "sonner";
 import Link from "next/link";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 export type Message = {
   role: "human" | "bot" | "placeholder";
@@ -161,13 +167,21 @@ const ChatComp = ({ id }: { id: string }) => {
     <div className="lg:h-[90vh] h-[50vh] flex flex-col">
       <div className="mb-4 flex items-center border-b pb-2 justify-between">
         <h2 className="text-2xl font-bold">Chat</h2>
-        <Button asChild variant="outline" size="icon">
-          <Link href={"https://buymeacoffee.com/shubhankit"}>
-            {" "}
-            <span className="h-5 w-5 m-auto">❤️</span>
-            <span className="sr-only">Like</span>
-          </Link>
-        </Button>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <SocialLink
+                href="https://buymeacoffee.com/shubhankit"
+                icon={HandHeart}
+              >
+                Support Me
+              </SocialLink>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>🧡</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
       <div
         className="flex-1 flex flex-col justify-between overflow-auto"
