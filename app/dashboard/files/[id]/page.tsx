@@ -29,7 +29,7 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
       <div className="flex flex-col lg:flex-row w-screen">
         {/* PDF Comp */}
         <div className="flex flex-col lg:w-1/2 mx-auto bg-background p-6">
-          <div className="flex h-fit mx-auto min-w-96">
+          <div className="flex h-fit m-auto min-w-96">
             <PdfView url={downloadURL} />
           </div>
         </div>

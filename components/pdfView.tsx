@@ -38,9 +38,9 @@ const PdfView = ({ url }: { url: string }) => {
   };
 
   return (
-    <div className="h-full mx-auto mb-10">
+    <div className="h-full m-auto mb-10">
       {!file ? (
-        <div className="flex w-full mx-auto flex-col h-full justify-center items-center">
+        <div className="flex w-full flex-col h-full justify-center items-center">
           <LoaderIcon className="animate-spin h-20 mx-auto w-20 text-[#fe640b]" />
           <p className="animate-pulse mt-2">Loading your PDF...</p>
         </div>

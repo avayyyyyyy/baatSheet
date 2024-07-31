@@ -162,9 +162,9 @@ const ChatComp = ({ id }: { id: string }) => {
       <div className="mb-4 flex items-center border-b pb-2 justify-between">
         <h2 className="text-2xl font-bold">Chat</h2>
         <Button asChild variant="outline" size="icon">
-          <Link href={"https://github.com/avayyyyyyy/baatsheet"}>
+          <Link href={"https://buymeacoffee.com/shubhankit"}>
             {" "}
-            <span className="h-5 w-5 m-auto">🚀</span>
+            <span className="h-5 w-5 m-auto">🧡</span>
             <span className="sr-only">Like</span>
           </Link>
         </Button>
