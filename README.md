@@ -1,6 +1,6 @@
 # बात-Sheet
 
-![Baat-Sheet](https://utfs.io/f/f41ae507-be30-4221-9809-97f80f78f847-lphjht.webp)
+![Baat-Sheet](https://utfs.io/f/0ecba989-149d-482a-81b0-dbfc66ee31c8-kzh7f9.webp)
 
 ## Introduction
 
