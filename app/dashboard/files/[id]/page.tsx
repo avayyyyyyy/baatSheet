@@ -25,17 +25,20 @@ const Page = async ({ params: { id } }: { params: { id: string } }) => {
   const downloadURL = await docRef.data()?.url;
 
   return (
-    // {/* Parent Div */}
-    <div className="flex flex-col lg:flex-row h-[95vh] w-full">
-      {/* PDF Comp */}
-      <div className="flex mx-auto bg-background p-6">
-        <div className="flex h-full  min-w-96 flex-col">
-          <PdfView url={downloadURL} />
+    <>
+      <div className="flex flex-col lg:flex-row h-[96vh] w-screen">
+        {/* PDF Comp */}
+        <div className="flex flex-col lg:w-1/2 mx-auto bg-background p-6">
+          <div className="flex h-full mx-auto min-w-96">
+            <PdfView url={downloadURL} />
+          </div>
+        </div>
+        {/* Chat Comp */}
+        <div className="flex z-30 flex-col lg:w-1/2 border-t lg:border-l-2 lg:border-t-0 border-[#fe640b] bg-background p-6">
+          <ChatComp id={id} />
         </div>
       </div>
-      {/* CHAT Comp */}
-      <ChatComp id={id} />
-    </div>
+    </>
   );
 };
 

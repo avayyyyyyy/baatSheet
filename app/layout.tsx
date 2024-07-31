@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkLoaded, ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,7 +44,10 @@ export default function RootLayout({
           <link rel="manifest" href="/site.webmanifest" />
         </head>
         <body className={inter.className}>
-          <ClerkLoaded>{children}</ClerkLoaded>
+          <ClerkLoaded>
+            {children}
+            <Analytics />
+          </ClerkLoaded>
         </body>
         <Toaster richColors duration={3000} closeButton />
       </html>

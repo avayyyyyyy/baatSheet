@@ -5,17 +5,7 @@ import "react-pdf/dist/esm/Page/TextLayer.css";
 import { Document, Page, pdfjs } from "react-pdf";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import {
-  RotateCw,
-  ZoomInIcon,
-  ZoomOutIcon,
-  LoaderIcon,
-  RefreshCcwIcon,
-  ArrowLeftSquare,
-  ArrowRight,
-  ArrowLeft,
-  RotateCwIcon,
-} from "lucide-react";
+import { LoaderIcon, ArrowRight, ArrowLeft, RotateCwIcon } from "lucide-react";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
@@ -51,10 +41,10 @@ const PdfView = ({ url }: { url: string }) => {
   // console.log("pageNumber: ", pageNumber);
 
   return (
-    <div className="h-full  mb-10">
+    <div className="h-full mx-auto mb-10">
       {!file ? (
-        <div className="flex w-full flex-col h-full justify-center items-center">
-          <LoaderIcon className="animate-spin h-20 w-20 text-[#fe640b]" />
+        <div className="flex w-full mx-auto flex-col h-full justify-center items-center">
+          <LoaderIcon className="animate-spin h-20 mx-auto w-20 text-[#fe640b]" />
           <p className="animate-pulse mt-2">Loading your PDF...</p>
         </div>
       ) : (

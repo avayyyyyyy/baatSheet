@@ -128,7 +128,7 @@ const ChatComp = ({ id }: { id: string }) => {
             </AvatarFallback>
           </Avatar>
         )}
-        <div className={`grid w-full gap-1 ${isHuman ? "text-right" : ""}`}>
+        <div className={`grid w-fit gap-1 ${isHuman ? "text-right" : ""}`}>
           <div className="font-medium">
             {isHuman ? user.user?.firstName : "BaatSheet"}
           </div>
@@ -154,7 +154,7 @@ const ChatComp = ({ id }: { id: string }) => {
   };
 
   return (
-    <div className="flex flex-col md:border-l-2 h-full md:w-full border-t lg:border-l-2 lg:border-t-0 border-[#fe640b] bg-background p-6">
+    <>
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-2xl font-bold">Chat</h2>
         <Button asChild variant="outline" size="icon">
@@ -200,7 +200,7 @@ const ChatComp = ({ id }: { id: string }) => {
       <div className="bg-white rounded-md p-5 mt-2 border-t w-full shadow-2xl text-sm">
         <Footer />
       </div>
-    </div>
+    </>
   );
 };
 
