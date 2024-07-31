@@ -128,12 +128,16 @@ const ChatComp = ({ id }: { id: string }) => {
             </AvatarFallback>
           </Avatar>
         )}
-        <div className={`grid w-fit gap-1 ${isHuman ? "text-right" : ""}`}>
+        <div
+          className={`grid justify-end items-end gap-1 ${
+            isHuman ? "text-right" : ""
+          }`}
+        >
           <div className="font-medium">
             {isHuman ? user.user?.firstName : "BaatSheet"}
           </div>
           <div
-            className={`rounded-lg p-3 text-sm ${
+            className={`rounded-lg p-3 w-fit text-sm ${
               isHuman ? "bg-primary text-primary-foreground" : "bg-muted"
             }`}
           >
@@ -154,24 +158,27 @@ const ChatComp = ({ id }: { id: string }) => {
   };
 
   return (
-    <>
-      <div className="mb-4 flex items-center justify-between">
+    <div className="lg:h-[90vh] h-[50vh] flex flex-col">
+      <div className="mb-4 flex items-center border-b pb-2 justify-between">
         <h2 className="text-2xl font-bold">Chat</h2>
         <Button asChild variant="outline" size="icon">
           <Link href={"https://github.com/avayyyyyyy/baatsheet"}>
             {" "}
-            <div className="h-5 w-5">❤️</div>
+            <span className="h-5 w-5 m-auto">🚀</span>
             <span className="sr-only">Like</span>
           </Link>
         </Button>
       </div>
-      <div className="flex-1 overflow-auto" ref={chatContainerRef}>
-        <div className="grid gap-4">
+      <div
+        className="flex-1 flex flex-col justify-between overflow-auto"
+        ref={chatContainerRef}
+      >
+        <div className="grid gap-4 p-4">
           {messages.map((msg, index) => RenderMessage(msg, index))}
         </div>
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className="mt-4 flex items-center gap-2">
+      <form onSubmit={handleSubmit} className="p-4 border-t">
+        <div className="flex items-center gap-2">
           <Input
             value={message}
             onChange={(e) => setMessage(e.target.value)}
@@ -197,10 +204,7 @@ const ChatComp = ({ id }: { id: string }) => {
           </Button>
         </div>
       </form>
-      <div className="bg-white rounded-md p-5 mt-2 border-t w-full shadow-2xl text-sm">
-        <Footer />
-      </div>
-    </>
+    </div>
   );
 };
 
