@@ -71,7 +71,7 @@ export default function Home() {
           Your Interactive Document Comparison
         </div>
         <div className="font-bold md:pt-4 pt-1 md:text-5xl lg:text-7xl shrink-0 text-transparent bg-clip-text bg-gradient-to-br from-zinc-950 to-zinc-600 my-5 text-3xl">
-          बात-चीत with your PDFs <br />
+          बात-चीत with your PDF&apos;s <br />
           in an super interactive way <span className="text-black">🚀</span>
         </div>
         <div className="my-5 font-medium text-lg">
@@ -80,7 +80,7 @@ export default function Home() {
             बात-Sheet
           </Link>
         </div>
-        <div className="text-zinc-600 md:w-[60%] mx-auto">
+        <div className="text-zinc-600 md:w-[60%] lg:w-[40%] mx-auto">
           An interactive way to बात (talk) with your PDFs. Get started with our
           app today and talk to your PDFs like never before with our intelligent
           chatbot.
