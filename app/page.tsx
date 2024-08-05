@@ -68,9 +68,10 @@ export default function Home() {
             href={"https://peerlist.io/avayyyyyyy/project/sheet"}
           >
             <Image
-              src={"https://peerlist.io/images/Launch_Badge_Light.svg"}
-              width={150}
-              height={150}
+              src={"https://peerlist.io/images/week_medal_1.svg"}
+              width={100}
+              height={100}
+              className="w-20 h-20 md:w-32 md:h-32"
               alt="peerlist"
             />
           </Link>
