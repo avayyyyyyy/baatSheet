@@ -1,7 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Textarea } from "@/components/ui/textarea";
-import { RefreshCcwIcon, Send } from "lucide-react";
 import PdfView from "@/components/pdfView";
 import { adminDB } from "@/firebaseAdmin";
 import { auth } from "@clerk/nextjs/server";
