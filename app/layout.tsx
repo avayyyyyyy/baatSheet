@@ -12,6 +12,20 @@ export const metadata: Metadata = {
   description: "Created By Shubhankit Jain",
 };
 
+// Extend the JSX.IntrinsicElements interface to include custom elements
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "widget-web-component": React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement>,
+        HTMLElement
+      > & {
+        projectid: string;
+      };
+    }
+  }
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,10 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html
-        lang="en"
-        className="min-h-screen h-screen overfow-hidden flex flex-col"
-      >
+      <html lang="en" className="min-h-screen h-screen flex flex-col">
         <head>
           <link
             rel="apple-touch-icon"
@@ -48,8 +59,24 @@ export default function RootLayout({
             {children}
             <Analytics />
           </ClerkLoaded>
+          <Toaster richColors duration={3000} closeButton />
+
+          <widget-web-component projectid="clzl198je0003rr5il2rmpohk"></widget-web-component>
+
+          <script
+            src="https://unpkg.com/react@18/umd/react.development.js"
+            async
+          ></script>
+          <script
+            async
+            src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+          ></script>
+
+          <script
+            async
+            src="https://opinify-widget-w24d.vercel.app/widget.umd.js"
+          ></script>
         </body>
-        <Toaster richColors duration={3000} closeButton />
       </html>
     </ClerkProvider>
   );
