@@ -61,17 +61,9 @@ export default function RootLayout({
           </ClerkLoaded>
           <Toaster richColors duration={3000} closeButton />
 
-          <widget-web-component projectid="clzl198je0003rr5il2rmpohk"></widget-web-component>
-
-          <script
-            src="https://unpkg.com/react@18/umd/react.development.js"
-            async
-          ></script>
-          <script
-            async
-            src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-          ></script>
-
+          <div style={{ position: "fixed", bottom: "30px", right: "20px" }}>
+            <widget-web-component projectid="clzl198je0003rr5il2rmpohk"></widget-web-component>
+          </div>
           <script
             async
             src="https://opinify-widget-w24d.vercel.app/widget.umd.js"
