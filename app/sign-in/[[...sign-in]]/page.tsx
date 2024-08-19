@@ -25,7 +25,7 @@ export default function SignInPage() {
 
   return (
     <div className="flex min-h-[100vh] flex-col items-center justify-center bg-gray-50 px-4 py-12 sm:px-10 lg:px-8">
-      <div className="mx-auto max-w-md space-y-6 border p-5 rounded-md shadow-md">
+      <div className="mx-auto max-w-md w-[40vw] space-y-6 border p-5 rounded-md shadow-md">
         <SignIn.Root>
           <SignIn.Step name="start">
             <div className="space-y-2 text-center">
@@ -68,7 +68,7 @@ export default function SignInPage() {
                 </Button>
               </Clerk.Connection>
               <Separator className="my-4" />
-              <div className="space-y-2 w-full">
+              {/* <div className="space-y-2 w-full">
                 <Clerk.Field name="identifier">
                   <Label htmlFor="email">Email:</Label>
                   <Input
@@ -80,8 +80,8 @@ export default function SignInPage() {
                   />
                   <Clerk.FieldError />
                 </Clerk.Field>
-              </div>
-              <SignIn.Action submit>
+              </div> */}
+              {/* <SignIn.Action submit>
                 <Button
                   onClick={() => {
                     if (email === "") {
@@ -96,11 +96,11 @@ export default function SignInPage() {
                 >
                   Continue
                 </Button>
-              </SignIn.Action>
+              </SignIn.Action> */}
             </div>
           </SignIn.Step>
 
-          <SignIn.Step name="verifications">
+          {/* <SignIn.Step name="verifications">
             <SignIn.Strategy name="email_code">
               <div className="space-y-2 text-center">
                 <h1 className="text-2xl font-bold text-gray-900">
@@ -185,9 +185,9 @@ export default function SignInPage() {
                 <Button className="w-full">Continue</Button>
               </SignIn.Action>
             </SignIn.Strategy>
-          </SignIn.Step>
+          </SignIn.Step> */}
 
-          <SignIn.Step name="forgot-password">
+          {/* <SignIn.Step name="forgot-password">
             <div className="space-y-2 text-center">
               <h1 className="text-2xl font-bold text-gray-900">
                 Forgot your password?
@@ -201,9 +201,9 @@ export default function SignInPage() {
                 Go back
               </Button>
             </SignIn.Action>
-          </SignIn.Step>
+          </SignIn.Step> */}
 
-          <SignIn.Step name="reset-password">
+          {/* <SignIn.Step name="reset-password">
             <div className="space-y-2 text-center">
               <h1 className="text-2xl font-bold text-gray-900">
                 Reset your password
@@ -235,7 +235,7 @@ export default function SignInPage() {
             <SignIn.Action submit>
               <Button className="w-full">Reset password</Button>
             </SignIn.Action>
-          </SignIn.Step>
+          </SignIn.Step> */}
         </SignIn.Root>
       </div>
     </div>
